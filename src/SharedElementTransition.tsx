@@ -135,7 +135,9 @@ export class SharedElementTransition extends React.Component<
 > {
   static prepareNode(node: SharedElementNode | null): any {
     let nodeStyle: any = {};
-    if (Platform.OS === "android" && node && node.parentInstance) {
+    // @ts-ignore
+    if ((Platform.OS === "android" || Platform.OS === "harmony") 
+    && node && node.parentInstance) {
       const child = React.Children.only(node.parentInstance.props.children);
       const props = child ? child.props : {};
       nodeStyle = StyleSheet.flatten([props.style]) || {};

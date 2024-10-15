@@ -1,0 +1,12 @@
+{
+  "name": "@react-native-oh-tpl/react-native-shared-element",
+  "version": "0.8.9-0.0.1",
+  "description": "",
+  "main": "index.ets",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@rnoh/react-native-openharmony": 'file:../react_native_openharmony'
+  }
+}
+
