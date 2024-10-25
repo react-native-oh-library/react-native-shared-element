@@ -18,14 +18,10 @@ public:
     void onChildRemoved(ComponentInstance::Shared const &childComponentInstance) override;
     void onPropsChanged(SharedConcreteProps const &props) override;
     ArkUINode &getLocalRootArkUINode() override;
-    
     void setViewItem(RNSharedElementTransition::Item item, facebook::react::SharedElementWarpNodeStruct node);
-    
-    
     void onFinalizeUpdates() override;
+    
     void onLayoutChanged(facebook::react::LayoutMetrics const& layoutMetrics) override;
-    
-    
     
 private:
     RNTransitionNode transitionNode{};

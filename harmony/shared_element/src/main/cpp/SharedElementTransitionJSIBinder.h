@@ -24,16 +24,10 @@ protected:
         object.setProperty(rt, "align", true);
         return object;
     }
-    
-    facebook::jsi::Object createBubblingEventTypes(facebook::jsi::Runtime &rt) override {
-        facebook::jsi::Object events(rt);
-        events.setProperty(rt, "topBubblingEvent", createBubblingCapturedEvent(rt, "onBubblingEvent"));
-        return events;
-    }
 
     facebook::jsi::Object createDirectEventTypes(facebook::jsi::Runtime &rt) override {
         facebook::jsi::Object events(rt);
-        events.setProperty(rt, "topDirectEvent", createDirectEvent(rt, "onDirectEvent"));
+        events.setProperty(rt, "topOnMeasureNode", createDirectEvent(rt, "onMeasureNode"));
         return events;
     }
 };
