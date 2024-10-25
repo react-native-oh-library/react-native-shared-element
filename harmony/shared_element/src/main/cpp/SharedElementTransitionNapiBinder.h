@@ -35,8 +35,6 @@ public:
         napi_value napiViewProps = ViewComponentNapiBinder::createProps(env, shadowView);
         auto propsObjBuilder = ArkJS(env).getObjectBuilder(napiViewProps);
         if (auto props = std::dynamic_pointer_cast<const facebook::react::SharedElementTransitionProps>(shadowView.props)) {
-            
-            
             return propsObjBuilder.build();
         }
 
