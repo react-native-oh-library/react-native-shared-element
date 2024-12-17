@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-shared-element",
+        "License": "MIT License",
+        "License File": "https://github.com/IjzerenHein/react-native-shared-element/blob/main/LICENSE.txt",
+        "Version Number": "0.8.9-0.0.2",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/IjzerenHein/react-native-shared-element",
+        "Description": "Native shared element transition primitives for react-native"
+    }
+]
