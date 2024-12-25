@@ -37,12 +37,6 @@ RNSharedElementDrawable::RNSharedElementDrawable()
     };
     eventReceiver = [](ArkUI_NodeCustomEvent *event) {
         int32_t tagId = OH_ArkUI_NodeCustomEvent_GetEventTargetId(event);
-        if (tagId == 77 || tagId == 89 || tagId == 90) {
-            auto *userData = reinterpret_cast<UserCallback *>(OH_ArkUI_NodeCustomEvent_GetUserData(event));
-            if (userData != nullptr && userData->callback != nullptr) {
-                userData->callback(event);
-            }
-        }
     };
     maybeThrow(NativeNodeApi::getInstance()->addNodeCustomEventReceiver(m_nodeHandle, eventReceiver));
     maybeThrow(NativeNodeApi::getInstance()->registerNodeCustomEvent(m_nodeHandle, ARKUI_NODE_CUSTOM_EVENT_ON_DRAW, 77,
