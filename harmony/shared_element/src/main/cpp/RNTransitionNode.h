@@ -165,10 +165,10 @@ public:
                 style->offset =
                     NativeNodeApi::getInstance()->getLayoutPosition(node->getLocalRootArkUINode().getArkUINodeHandle());
 
-                ArkUI_IntOffset *intOff;
+                ArkUI_IntOffset intOff = {0, 0};
                 OH_ArkUI_NodeUtils_GetLayoutPositionInScreen(node->getLocalRootArkUINode().getArkUINodeHandle(),
-                                                             intOff);
-                style->offset = {intOff->x, intOff->y};
+                                                             &intOff);
+                style->offset = {intOff.x, intOff.y};
 
                 return child;
             }
