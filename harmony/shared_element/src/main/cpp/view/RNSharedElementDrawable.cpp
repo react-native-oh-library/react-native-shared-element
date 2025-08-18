@@ -11,6 +11,7 @@
 #include <native_drawing/drawing_path.h>
 #include <native_drawing/drawing_round_rect.h>
 #include "SharedElementManager.h"
+#include "RNOH/arkui/NativeNodeApi.h"
 
 namespace rnoh {
 

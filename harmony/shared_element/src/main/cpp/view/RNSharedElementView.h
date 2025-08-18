@@ -6,6 +6,7 @@
 
 #pragma once
 #include "RNSharedElementDrawable.h"
+#include "RNOH/arkui/NativeNodeApi.h"
 
 namespace rnoh {
 class RNSharedElementView : public ArkUINode {

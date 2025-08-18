@@ -33,7 +33,7 @@ protected:
 
     facebook::jsi::Object createDirectEventTypes(facebook::jsi::Runtime &rt) override {
         facebook::jsi::Object events(rt);
-        events.setProperty(rt, "topOnMeasureNode", createDirectEvent(rt, "onMeasureNode"));
+        events.setProperty(rt, "topMeasureNode", createDirectEvent(rt, "onMeasureNode"));
         return events;
     }
 };
