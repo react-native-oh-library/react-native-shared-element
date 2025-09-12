@@ -201,13 +201,13 @@ public:
                 if (endImageStyle->boundingBox.size.width > startImageStyle->boundingBox.size.width &&
                     endImageStyle->boundingBox.size.height > startImageStyle->boundingBox.size.height) {
                     // endImageStyle 矩形在宽度和高度上都更大
-                    Float scaleW = (endImageStyle->boundingBox.size.width - startImageStyle->boundingBox.size.width) *
+                    facebook::react::Float scaleW = (endImageStyle->boundingBox.size.width - startImageStyle->boundingBox.size.width) *
                                    (1 - nodePosition_);
-                    Float endW = endImageStyle->boundingBox.size.width - scaleW;
+                    facebook::react::Float endW = endImageStyle->boundingBox.size.width - scaleW;
 
-                    Float scaleH = (endImageStyle->boundingBox.size.height - startImageStyle->boundingBox.size.height) *
+                    facebook::react::Float scaleH = (endImageStyle->boundingBox.size.height - startImageStyle->boundingBox.size.height) *
                                    (1 - nodePosition_);
-                    Float endH = endImageStyle->boundingBox.size.height - scaleH;
+                    facebook::react::Float endH = endImageStyle->boundingBox.size.height - scaleH;
 
                     float scalePositionX = static_cast<float>(endImageStyle->offset.x) / pixelDensity + scaleW / 2;
                     float scalePositionY = static_cast<float>(endImageStyle->offset.y) / pixelDensity + scaleH / 2;
@@ -225,13 +225,13 @@ public:
                            endImageStyle->boundingBox.size.height < startImageStyle->boundingBox.size.height) {
                     // startImageStyle 矩形在宽度和高度上都更大
                     // 计算宽度和高度的缩放量
-                    Float scaleW = (startImageStyle->boundingBox.size.width - endImageStyle->boundingBox.size.width) *
+                    facebook::react::Float scaleW = (startImageStyle->boundingBox.size.width - endImageStyle->boundingBox.size.width) *
                                    nodePosition_;
-                    Float endW = startImageStyle->boundingBox.size.width - scaleW;
+                    facebook::react::Float endW = startImageStyle->boundingBox.size.width - scaleW;
 
-                    Float scaleH = (startImageStyle->boundingBox.size.height - endImageStyle->boundingBox.size.height) *
+                    facebook::react::Float scaleH = (startImageStyle->boundingBox.size.height - endImageStyle->boundingBox.size.height) *
                                    nodePosition_;
-                    Float endH = startImageStyle->boundingBox.size.height - scaleH;
+                    facebook::react::Float endH = startImageStyle->boundingBox.size.height - scaleH;
 
                     // 计算缩放后的位置
                     float scalePositionX = static_cast<float>(startImageStyle->offset.x) / pixelDensity + scaleW / 2;
@@ -259,13 +259,13 @@ public:
                 if (endImageStyle->boundingBox.size.width > startImageStyle->boundingBox.size.width &&
                     endImageStyle->boundingBox.size.height > startImageStyle->boundingBox.size.height) {
                     // endImageStyle 矩形在宽度和高度上都更大
-                    Float scaleW = (endImageStyle->boundingBox.size.width - startImageStyle->boundingBox.size.width) *
+                    facebook::react::Float scaleW = (endImageStyle->boundingBox.size.width - startImageStyle->boundingBox.size.width) *
                                    nodePosition_;
-                    Float startW = startImageStyle->boundingBox.size.width + scaleW;
+                    facebook::react::Float startW = startImageStyle->boundingBox.size.width + scaleW;
 
-                    Float scaleH = (endImageStyle->boundingBox.size.height - startImageStyle->boundingBox.size.height) *
+                    facebook::react::Float scaleH = (endImageStyle->boundingBox.size.height - startImageStyle->boundingBox.size.height) *
                                    nodePosition_;
-                    Float startH = startImageStyle->boundingBox.size.width + scaleH;
+                    facebook::react::Float startH = startImageStyle->boundingBox.size.width + scaleH;
 
                     float scalePositionX = static_cast<float>(startImageStyle->offset.x) / pixelDensity - scaleW / 2;
                     float scalePositionY = static_cast<float>(startImageStyle->offset.y) / pixelDensity - scaleH / 2;
@@ -283,13 +283,13 @@ public:
                 } else if (endImageStyle->boundingBox.size.width < startImageStyle->boundingBox.size.width &&
                            endImageStyle->boundingBox.size.height < startImageStyle->boundingBox.size.height) {
                     // 计算缩放量
-                    Float scaleW = (startImageStyle->boundingBox.size.width - endImageStyle->boundingBox.size.width) *
+                    facebook::react::Float scaleW = (startImageStyle->boundingBox.size.width - endImageStyle->boundingBox.size.width) *
                                    (1 - nodePosition_);
-                    Float startW = endImageStyle->boundingBox.size.width + scaleW;
+                    facebook::react::Float startW = endImageStyle->boundingBox.size.width + scaleW;
 
-                    Float scaleH = (startImageStyle->boundingBox.size.height - endImageStyle->boundingBox.size.height) *
+                    facebook::react::Float scaleH = (startImageStyle->boundingBox.size.height - endImageStyle->boundingBox.size.height) *
                                    (1 - nodePosition_);
-                    Float startH = endImageStyle->boundingBox.size.height + scaleH;
+                    facebook::react::Float startH = endImageStyle->boundingBox.size.height + scaleH;
 
                     // 计算新的位置，保证中心对齐
                     float scalePositionX = static_cast<float>(endImageStyle->offset.x) / pixelDensity - scaleW / 2;

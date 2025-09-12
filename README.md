@@ -1,4 +1,4 @@
-# @react-native-oh-tpl/react-native-shared-element
+# @react-native-ohos/react-native-shared-element
 
 本项目基于 [react-native-shared-element](https://github.com/IjzerenHein/react-native-shared-element)
 

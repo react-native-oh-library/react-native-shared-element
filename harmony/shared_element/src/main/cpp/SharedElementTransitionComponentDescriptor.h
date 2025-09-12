@@ -60,7 +60,7 @@ public:
 
 
 static inline void fromSharedElementNodeRawValue(const PropsParserContext &context,
-                                                 butter::map<std::string, RawValue> map, SharedElementNodeCls &result) {
+                                                 std::unordered_map<std::string, RawValue> map, SharedElementNodeCls &result) {
     auto tmp_nodeHandle = map.find("nodeHandle");
     if (tmp_nodeHandle != map.end()) {
         fromRawValue(context, tmp_nodeHandle->second, result.nodeHandle);
@@ -71,7 +71,7 @@ static inline void fromSharedElementNodeRawValue(const PropsParserContext &conte
     }
     auto tmp_nodeStyle = map.find("nodeStyle");
     if (tmp_nodeStyle != map.end()) {
-        auto map = (butter::map<std::string, RawValue>)tmp_nodeStyle->second;
+        auto map = (std::unordered_map<std::string, RawValue>)tmp_nodeStyle->second;
         auto tmp_resizeMode = map.find("resizeMode");
         if (tmp_resizeMode != map.end()) {
             fromRawValue(context, tmp_resizeMode->second, result.nodeStyle.resizeMode);
@@ -93,15 +93,15 @@ static inline void fromSharedElementNodeRawValue(const PropsParserContext &conte
 
 static inline void fromRawValue(const PropsParserContext &context, const RawValue &value,
                                 SharedElementWarpNodeStruct &result) {
-    auto map = (butter::map<std::string, RawValue>)value;
+    auto map = (std::unordered_map<std::string, RawValue>)value;
 
     auto tmp_node = map.find("node");
     if (tmp_node != map.end()) {
-        fromSharedElementNodeRawValue(context, (butter::map<std::string, RawValue>)tmp_node->second, result.node);
+        fromSharedElementNodeRawValue(context, (std::unordered_map<std::string, RawValue>)tmp_node->second, result.node);
     }
     auto tmp_ancestor = map.find("ancestor");
     if (tmp_ancestor != map.end()) {
-        fromSharedElementNodeRawValue(context, (butter::map<std::string, RawValue>)tmp_ancestor->second,
+        fromSharedElementNodeRawValue(context, (std::unordered_map<std::string, RawValue>)tmp_ancestor->second,
                                       result.ancestor);
     }
 }
