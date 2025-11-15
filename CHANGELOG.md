@@ -1,8 +1,22 @@
-# [0.9.1-rc.1](https://github.com/react-native-oh-library/react-native-shared-element)2025-11-03
+# [0.9.1-rc.1](https://github.com/react-native-oh-library/react-native-shared-element) (2025-11-03)
+### Features
 
-### pre-release 
 
-* pre-release version 0.9.1-rc.1
+*   修改组织名为 @react-native-ohos
+
+# [0.9.0](https://github.com/react-native-oh-library/react-native-shared-element) (2025-09-12)
+
+### Features
+
+*   支持RN 0.77
+
+### Bug Fixes
+
+*   适配RN 0.77相关变更
+    *   补充 NativeNodeApi 相关头文件引用
+    *   移除已废弃的 butter::map，改用 std::unordered_map
+    *   修正事件名称，将 topOnMeasureNode 改为 topMeasureNode
+    *   using Float = facebook::react::Float已删除，直接使用 facebook::react::Float
 
 # [0.8.9](https://github.com/IjzerenHein/react-native-shared-element/compare/v0.8.8...v0.8.9) (2023-11-17)
 
