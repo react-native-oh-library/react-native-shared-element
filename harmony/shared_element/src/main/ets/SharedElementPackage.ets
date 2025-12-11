@@ -5,7 +5,7 @@
  */
 
 import {
-  RNPackage, TurboModulesFactory } from '@rnoh/react-native-openharmony/ts';
+  RNOHPackage, TurboModulesFactory } from '@rnoh/react-native-openharmony';
 import type { TurboModule, TurboModuleContext } from '@rnoh/react-native-openharmony/ts';
 import { SharedElementModule } from './SharedElementModule';
 
@@ -22,7 +22,7 @@ class RNSharedElementTurboModulesFactory extends TurboModulesFactory {
   }
 }
 
-export class SharedElementPackage extends RNPackage {
+export class SharedElementPackage extends RNOHPackage  {
   createTurboModulesFactory(ctx: TurboModuleContext): TurboModulesFactory {
     return new RNSharedElementTurboModulesFactory(ctx);
   }

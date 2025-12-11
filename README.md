@@ -1,6 +1,6 @@
-# @react-native-oh-tpl/react-native-shared-element
+# @react-native-ohos/react-native-shared-element
 
-本项目基于 [react-native-shared-element](https://github.com/IjzerenHein/react-native-shared-element)
+本项目基于 [react-native-shared-element@0.8.9](https://github.com/IjzerenHein/react-native-shared-element/releases/tag/v0.8.9)
 
 ## 文档地址 / Documentation URL 
 

@@ -4,4 +4,7 @@
  * found in the LICENSE file.
  */
 
+import { SharedElementPackage } from './src/main/ets/SharedElementPackage';
 export * from './ts'
+
+export default SharedElementPackage;
