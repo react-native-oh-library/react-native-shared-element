@@ -1,5 +1,5 @@
 {
-  "name": "@react-native-oh-tpl/react-native-shared-element",
+  "name": "@react-native-ohos/react-native-shared-element",
   "version": "0.8.9-0.0.6",
   "description": "Native shared element transition primitives for react-native 💫",
   "main": "build/index.js",
@@ -26,11 +26,11 @@
     "shared element transition",
     "visual clone"
   ],
-  "repository": "https://github.com/IjzerenHein/react-native-shared-element",
-  "bugs": "https://github.com/IjzerenHein/react-native-shared-element/issues",
+  "repository": "https://github.com/react-native-oh-library/react-native-shared-element",
+  "bugs": "https://github.com/react-native-oh-library/react-native-shared-element/issues",
   "author": "IjzerenHein <hrutjes@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/IjzerenHein/react-native-shared-element",
+  "homepage": "https://github.com/react-native-oh-library/react-native-shared-element",
   "files": [
     "src/",
     "build/",
@@ -47,6 +47,16 @@
     "react-native-shared-element": "^0.8.9"
   },
   "harmony": {
-    "alias": "react-native-shared-element"
+    "alias": "react-native-shared-element",
+     "autolinking": {
+      "etsPackageClassName":"SharedElementPackage",
+      "cppPackageClassName":"SharedElementPackage",
+      "cmakeLibraryTargetName": "rnoh_shared_element", 
+      "ohPackageName": "@react-native-ohos/react-native-shared-element"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
