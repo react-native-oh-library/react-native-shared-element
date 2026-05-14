@@ -1,6 +1,11 @@
+# Changelog
+## 鸿蒙化Log
+### 0.10.0-rc.1
+- pre-release version 0.10.0-rc.1
+- feat：autolink 0.82框架适配
+
 # [0.9.1-rc.1](https://github.com/react-native-oh-library/react-native-shared-element) (2025-11-03)
 ### Features
-
 
 *   修改组织名为 @react-native-ohos
 
