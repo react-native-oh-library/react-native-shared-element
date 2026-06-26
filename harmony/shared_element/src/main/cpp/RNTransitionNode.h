@@ -108,15 +108,15 @@ public:
             return;
         }
 
-        node->getLocalRootArkUINode().setOpacity(0);
-
         transitionNodes.push_back(node);
         
         if (item == 0) {
             startNode = node;
 
-            if (animation_ == 2) {
-                startNode->getLocalRootArkUINode().setOpacity(1);
+            if (animation_ == 0 || animation_ == 1 || animation_ == 2 || animation_ == 3 || animation_ == 4) {
+                node->getLocalRootArkUINode().setOpacity(1.0f);
+            } else {
+                node->getLocalRootArkUINode().setOpacity(0.0f);
             }
 
             startImageStyle = std::make_shared<RNSharedStyle>();
@@ -134,8 +134,10 @@ public:
         } else {
             endNode = node;
 
-            if (animation_ == 3) {
-                endNode->getLocalRootArkUINode().setOpacity(1);
+            if (animation_ == 0 || animation_ == 3 || animation_ == 4) {
+                node->getLocalRootArkUINode().setOpacity(1.0f);
+            } else {
+                node->getLocalRootArkUINode().setOpacity(0.0f);
             }
 
             endImageStyle = std::make_shared<RNSharedStyle>();
@@ -182,132 +184,74 @@ public:
 
     void onLayout(int direct) {
         if (direct == 1) {
-            // 取 end
             recoverAlpha = mInitialNodePositionSet && nodePosition_ == 0;
         } else {
-            // 取 start
             recoverAlpha = mInitialNodePositionSet && nodePosition_ == 1;
         }
 
         if (recoverAlpha) {
             for (std::shared_ptr<ComponentInstance> node : transitionNodes) {
-                node->getLocalRootArkUINode().setOpacity(1);
+                if (animation_ != 4 || node != startNode) {
+                    node->getLocalRootArkUINode().setOpacity(1);
+                }
             }
             mInitialNodeLayoutPositionSet = false;
         } else {
             if (direct == 1) {
                 setLayoutPosition(direct);
 
-                if (endImageStyle->boundingBox.size.width > startImageStyle->boundingBox.size.width &&
-                    endImageStyle->boundingBox.size.height > startImageStyle->boundingBox.size.height) {
-                    // endImageStyle 矩形在宽度和高度上都更大
-                    facebook::react::Float scaleW = (endImageStyle->boundingBox.size.width - startImageStyle->boundingBox.size.width) *
-                                   (1 - nodePosition_);
-                    facebook::react::Float endW = endImageStyle->boundingBox.size.width - scaleW;
+                float startWidth = startImageStyle->boundingBox.size.width;
+                float startHeight = startImageStyle->boundingBox.size.height;
+                float endWidth = endImageStyle->boundingBox.size.width;
+                float endHeight = endImageStyle->boundingBox.size.height;
 
-                    facebook::react::Float scaleH = (endImageStyle->boundingBox.size.height - startImageStyle->boundingBox.size.height) *
-                                   (1 - nodePosition_);
-                    facebook::react::Float endH = endImageStyle->boundingBox.size.height - scaleH;
+                float startX = static_cast<float>(startImageStyle->offset.x) / pixelDensity;
+                float startY = static_cast<float>(startImageStyle->offset.y) / pixelDensity;
+                float endX = static_cast<float>(endImageStyle->offset.x) / pixelDensity;
+                float endY = static_cast<float>(endImageStyle->offset.y) / pixelDensity;
 
-                    float scalePositionX = static_cast<float>(endImageStyle->offset.x) / pixelDensity + scaleW / 2;
-                    float scalePositionY = static_cast<float>(endImageStyle->offset.y) / pixelDensity + scaleH / 2;
+                float currentWidth = startWidth + (endWidth - startWidth) * nodePosition_;
+                float currentHeight = startHeight + (endHeight - startHeight) * nodePosition_;
 
-                    if (endW < startImageStyle->boundingBox.size.width) {
-                        endW = startImageStyle->boundingBox.size.width;
-                    };
-                    if (endH < startImageStyle->boundingBox.size.height) {
-                        endH = startImageStyle->boundingBox.size.height;
-                    };
-                    setPosition({scalePositionX, scalePositionY});
-                    setSize({endW, endH});
-                    endSharedElementNode.setSize({endW, endH});
-                } else if (endImageStyle->boundingBox.size.width < startImageStyle->boundingBox.size.width &&
-                           endImageStyle->boundingBox.size.height < startImageStyle->boundingBox.size.height) {
-                    // startImageStyle 矩形在宽度和高度上都更大
-                    // 计算宽度和高度的缩放量
-                    facebook::react::Float scaleW = (startImageStyle->boundingBox.size.width - endImageStyle->boundingBox.size.width) *
-                                   nodePosition_;
-                    facebook::react::Float endW = startImageStyle->boundingBox.size.width - scaleW;
+                float currentX = startX + (endX - startX) * nodePosition_;
+                float currentY = startY + (endY - startY) * nodePosition_;
 
-                    facebook::react::Float scaleH = (startImageStyle->boundingBox.size.height - endImageStyle->boundingBox.size.height) *
-                                   nodePosition_;
-                    facebook::react::Float endH = startImageStyle->boundingBox.size.height - scaleH;
+                currentX = currentX - (currentWidth - startWidth) / 2;
+                currentY = currentY - (currentHeight - startHeight) / 2;
 
-                    // 计算缩放后的位置
-                    float scalePositionX = static_cast<float>(startImageStyle->offset.x) / pixelDensity + scaleW / 2;
-                    float scalePositionY = static_cast<float>(startImageStyle->offset.y) / pixelDensity + scaleH / 2;
-
-                    // 确保宽度和高度不小于 endImageStyle 的最小值
-                    if (endW > startImageStyle->boundingBox.size.width) {
-                        endW = startImageStyle->boundingBox.size.width;
-                    }
-                    if (endH > startImageStyle->boundingBox.size.height) {
-                        endH = startImageStyle->boundingBox.size.height;
-                    }
-
-                    // 设置位置和大小
-                    setPosition({scalePositionX, scalePositionY});
-                    setSize({endW, endH});
-                    endSharedElementNode.setSize({endW, endH});
-                }
+                setPosition({currentX, currentY});
+                setSize({currentWidth, currentHeight});
+                endSharedElementNode.setSize({currentWidth, currentHeight});
+                endSharedElementNode.setPosition({0, 0});
 
                 applyOpacity(animation_);
 
                 maybeThrow(NativeNodeApi::getInstance()->insertChildAt(
                     m_nodeHandle, endSharedElementNode.getArkUINodeHandle(), static_cast<int32_t>(-1)));
             } else {
-                if (endImageStyle->boundingBox.size.width > startImageStyle->boundingBox.size.width &&
-                    endImageStyle->boundingBox.size.height > startImageStyle->boundingBox.size.height) {
-                    // endImageStyle 矩形在宽度和高度上都更大
-                    facebook::react::Float scaleW = (endImageStyle->boundingBox.size.width - startImageStyle->boundingBox.size.width) *
-                                   nodePosition_;
-                    facebook::react::Float startW = startImageStyle->boundingBox.size.width + scaleW;
+                float startWidth = startImageStyle->boundingBox.size.width;
+                float startHeight = startImageStyle->boundingBox.size.height;
+                float endWidth = endImageStyle->boundingBox.size.width;
+                float endHeight = endImageStyle->boundingBox.size.height;
 
-                    facebook::react::Float scaleH = (endImageStyle->boundingBox.size.height - startImageStyle->boundingBox.size.height) *
-                                   nodePosition_;
-                    facebook::react::Float startH = startImageStyle->boundingBox.size.width + scaleH;
+                float startX = static_cast<float>(startImageStyle->offset.x) / pixelDensity;
+                float startY = static_cast<float>(startImageStyle->offset.y) / pixelDensity;
+                float endX = static_cast<float>(endImageStyle->offset.x) / pixelDensity;
+                float endY = static_cast<float>(endImageStyle->offset.y) / pixelDensity;
 
-                    float scalePositionX = static_cast<float>(startImageStyle->offset.x) / pixelDensity - scaleW / 2;
-                    float scalePositionY = static_cast<float>(startImageStyle->offset.y) / pixelDensity - scaleH / 2;
+                float currentWidth = startWidth + (endWidth - startWidth) * (1 - nodePosition_);
+                float currentHeight = startHeight + (endHeight - startHeight) * (1 - nodePosition_);
 
-                    if (startW > endImageStyle->boundingBox.size.width) {
-                        startW = endImageStyle->boundingBox.size.width;
-                    };
-                    if (startH > endImageStyle->boundingBox.size.height) {
-                        startH = endImageStyle->boundingBox.size.height;
-                    };
+                float currentX = startX + (endX - startX) * (1 - nodePosition_);
+                float currentY = startY + (endY - startY) * (1 - nodePosition_);
 
-                    setPosition({scalePositionX, scalePositionY});
-                    setSize({startW, startH});
-                    startSharedElementNode.setSize({startW, startH});
-                } else if (endImageStyle->boundingBox.size.width < startImageStyle->boundingBox.size.width &&
-                           endImageStyle->boundingBox.size.height < startImageStyle->boundingBox.size.height) {
-                    // 计算缩放量
-                    facebook::react::Float scaleW = (startImageStyle->boundingBox.size.width - endImageStyle->boundingBox.size.width) *
-                                   (1 - nodePosition_);
-                    facebook::react::Float startW = endImageStyle->boundingBox.size.width + scaleW;
+                currentX = currentX - (currentWidth - startWidth) / 2;
+                currentY = currentY - (currentHeight - startHeight) / 2;
 
-                    facebook::react::Float scaleH = (startImageStyle->boundingBox.size.height - endImageStyle->boundingBox.size.height) *
-                                   (1 - nodePosition_);
-                    facebook::react::Float startH = endImageStyle->boundingBox.size.height + scaleH;
-
-                    // 计算新的位置，保证中心对齐
-                    float scalePositionX = static_cast<float>(endImageStyle->offset.x) / pixelDensity - scaleW / 2;
-                    float scalePositionY = static_cast<float>(endImageStyle->offset.y) / pixelDensity - scaleH / 2;
-
-                    // 设定最大值限制
-                    if (startW > startImageStyle->boundingBox.size.width) {
-                        startW = startImageStyle->boundingBox.size.width;
-                    }
-                    if (startH > startImageStyle->boundingBox.size.height) {
-                        startH = startImageStyle->boundingBox.size.height;
-                    }
-
-                    // 设置新的位置和大小
-                    setPosition({scalePositionX, scalePositionY});
-                    setSize({startW, startH});
-                    startSharedElementNode.setSize({startW, startH});
-                }
+                setPosition({currentX, currentY});
+                setSize({currentWidth, currentHeight});
+                startSharedElementNode.setSize({currentWidth, currentHeight});
+                startSharedElementNode.setPosition({0, 0});
 
                 applyOpacity(animation_);
 
@@ -329,10 +273,49 @@ public:
     }
 
     void applyOpacity(int animationType) {
-        if (animationType == 1 || animationType == 3) {
-            setOpacity(0.5);
+        if (animationType == 1) {
+            float startOpacity = 1.0f - nodePosition_;
+            float endOpacity = nodePosition_;
+            
+            if (startNode != nullptr) {
+                startNode->getLocalRootArkUINode().setOpacity(startOpacity);
+            }
+            if (endNode != nullptr) {
+                endNode->getLocalRootArkUINode().setOpacity(endOpacity);
+            }
+            
+            setOpacity(0.0f);
         } else if (animationType == 2) {
-            setOpacity(0.8);
+            if (startNode != nullptr) {
+                startNode->getLocalRootArkUINode().setOpacity(1.0f);
+            }
+            if (endNode != nullptr) {
+                endNode->getLocalRootArkUINode().setOpacity(0.0f);
+            }
+            
+            setOpacity(0.0f);
+        } else if (animationType == 3) {
+            if (startNode != nullptr) {
+                startNode->getLocalRootArkUINode().setOpacity(0.0f);
+            }
+            if (endNode != nullptr) {
+                endNode->getLocalRootArkUINode().setOpacity(1.0f);
+            }
+            
+            setOpacity(0.0f);
+        } else if (animationType == 4) {
+            float startOpacity = 1.0f - nodePosition_;
+            
+            if (startNode != nullptr) {
+                startNode->getLocalRootArkUINode().setOpacity(startOpacity);
+            }
+            if (endNode != nullptr) {
+                endNode->getLocalRootArkUINode().setOpacity(1.0f);
+            }
+            
+            setOpacity(0.0f);
+        } else {
+            setOpacity(1.0);
         }
     }
 
