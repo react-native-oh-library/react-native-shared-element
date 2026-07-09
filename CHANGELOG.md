@@ -1,11 +1,8 @@
 # Changelog
 ## 鸿蒙化Log
-### 0.10.0-rc.1
-- pre-release version 0.10.0-rc.2
+### 0.10.0-beta.2
+- pre-release version 0.10.0-beta.2
 - fix: 修改起始元素先消失，再显示问题和动画显示过程中出现图片飘动问题
-
-### 0.10.0-rc.1
-- pre-release version 0.10.0-rc.1
 - feat：autolink 0.82框架适配
 
 # [0.9.1-rc.1](https://github.com/react-native-oh-library/react-native-shared-element) (2025-11-03)
