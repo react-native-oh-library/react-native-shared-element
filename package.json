@@ -1,11 +1,12 @@
 {
   "name": "@react-native-ohos/react-native-shared-element",
-  "version": "0.10.0-rc.2",
+  "version": "0.10.0-beta.2",
   "description": "Native shared element transition primitives for react-native 💫",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "sideEffects": false,
   "scripts": {
+    "prepack": "npm run build",
     "build": "tsc",
     "clean": "expo-module clean",
     "lint": "expo-module lint",
