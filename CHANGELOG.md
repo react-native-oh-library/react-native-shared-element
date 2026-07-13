@@ -1,6 +1,6 @@
 # Changelog
 ## 鸿蒙化Log
-### 0.9.2-rc.1
+### 0.9.2-beta.1
 - pre-release version 0.9.2-rc.1
 
 # [0.9.1-rc.1](https://github.com/react-native-oh-library/react-native-shared-element) (2025-11-03)
